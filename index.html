@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Latihan Python &amp; Vibe Coding</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main id="layar-awal" class="layar">
+    <div class="kartu awal">
+      <p class="merek"><span class="titik"></span>Latihan Python &amp; Vibe Coding</p>
+      <h1>Siap latihan ujian?</h1>
+      <p class="sub">Python, VS Code, dan vibe coding. Pilih materi, lalu mulai.</p>
+
+      <div class="awal-grid">
+      <fieldset>
+        <legend>Materi</legend>
+        <div id="pilihan-materi" class="pilihan-materi"></div>
+        <div id="jumlah-atur" class="timer-atur jumlah-atur">
+          <label for="jumlah-soal">Jumlah soal acak</label>
+          <input type="number" id="jumlah-soal" min="1" step="1">
+          <span id="jumlah-maks"></span>
+        </div>
+      </fieldset>
+
+      <div class="atur">
+      <fieldset>
+        <legend>Timer per soal <span id="label-timer" class="nilai-timer">60 detik</span></legend>
+        <div class="timer-atur">
+          <input type="range" id="geser-timer" min="0" max="90" step="5" value="60" aria-label="Timer per soal (geser)">
+          <input type="number" id="angka-timer" min="0" max="90" step="1" value="60" aria-label="Timer per soal dalam detik">
+          <span>detik</span>
+        </div>
+        <p class="petunjuk">0 = timer mati · maksimal 90 detik</p>
+      </fieldset>
+
+      <fieldset>
+        <legend>Warna tema</legend>
+        <div class="warna">
+          <label title="Merah"><input type="radio" name="warna" value="merah" aria-label="Merah"><span style="--c:#dc2626"></span></label>
+          <label title="Jingga"><input type="radio" name="warna" value="jingga" aria-label="Jingga"><span style="--c:#ea580c"></span></label>
+          <label title="Kuning"><input type="radio" name="warna" value="kuning" aria-label="Kuning"><span style="--c:#eab308"></span></label>
+          <label title="Hijau"><input type="radio" name="warna" value="hijau" aria-label="Hijau"><span style="--c:#16a34a"></span></label>
+          <label title="Biru"><input type="radio" name="warna" value="biru" aria-label="Biru" checked><span style="--c:#1d4ed8"></span></label>
+          <label title="Nila"><input type="radio" name="warna" value="nila" aria-label="Nila"><span style="--c:#4338ca"></span></label>
+          <label title="Ungu"><input type="radio" name="warna" value="ungu" aria-label="Ungu"><span style="--c:#9333ea"></span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Font</legend>
+        <div class="segmen font">
+          <label><input type="radio" name="font" value="sistem" checked><span style="--f:system-ui, sans-serif">Standar</span></label>
+          <label><input type="radio" name="font" value="serif"><span style="--f:Georgia, serif">Serif</span></label>
+          <label><input type="radio" name="font" value="humanis"><span style="--f:Verdana, sans-serif">Humanis</span></label>
+          <label><input type="radio" name="font" value="mono"><span style="--f:Consolas, monospace">Monospace</span></label>
+        </div>
+      </fieldset>
+
+      <div class="cek-baris">
+        <label class="cek"><input type="checkbox" id="acak" checked> Acak urutan soal</label>
+        <label class="cek"><input type="checkbox" id="suara" checked> Efek suara</label>
+      </div>
+
+      <button id="tombol-mulai" class="tombol utama">Mulai</button>
+      </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="layar-soal" class="layar" hidden>
+    <header class="header">
+      <p class="merek"><span class="titik"></span>Latihan Python &amp; Vibe Coding</p>
+      <div class="progres">
+        <span id="teks-progres">Soal 1 dari 1</span>
+        <div class="bar"><div id="isi-bar" class="isi-bar"></div></div>
+      </div>
+      <div id="timer" class="timer">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="12" cy="13" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 9v4l2 2M9 2h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <span id="teks-timer">01:00</span>
+      </div>
+      <button id="selesai" class="tombol keluar" title="Hentikan kuis dan lihat skor soal yang sudah dijawab">Selesai</button>
+      <button id="keluar" class="tombol keluar" title="Kembali ke menu awal">✕ Keluar</button>
+    </header>
+
+    <main class="isi">
+      <section class="kartu soal">
+        <div class="meta">
+          <span id="badge" class="badge">PERTANYAAN 1</span>
+          <span id="kategori" class="kategori"></span>
+        </div>
+        <h2 id="pertanyaan" class="pertanyaan"></h2>
+        <pre id="blok-kode" class="blok-kode"><code id="kode"></code></pre>
+      </section>
+
+      <section id="opsi" class="daftar-opsi"></section>
+    </main>
+
+    <section id="umpan-balik" class="kartu umpan-balik" hidden>
+      <h3 id="judul-umpan"></h3>
+      <p id="ringkas-umpan" class="ringkas"></p>
+      <div id="pembahasan" class="pembahasan"></div>
+      <button id="tombol-lanjut" class="tombol utama">Soal berikutnya</button>
+    </section>
+  </div>
+
+  <main id="layar-hasil" class="layar" hidden>
+    <div class="kartu hasil">
+      <p class="merek"><span class="titik"></span>Latihan Python &amp; Vibe Coding</p>
+      <h1>Hasil latihan</h1>
+      <p id="skor" class="skor"></p>
+      <h3>Benar per materi</h3>
+      <table id="rincian" class="rincian"></table>
+      <div class="aksi">
+        <button id="ulang-semua" class="tombol utama">Ulangi semua</button>
+        <button id="ulang-salah" class="tombol">Ulangi yang salah saja</button>
+        <button id="ke-menu" class="tombol">Kembali ke menu awal</button>
+      </div>
+      <h3 id="judul-salah">Soal yang salah</h3>
+      <div id="daftar-salah"></div>
+    </div>
+  </main>
+
+  <dialog id="dialog" class="dialog" aria-labelledby="dialog-judul" aria-describedby="dialog-pesan">
+    <form method="dialog">
+      <div id="dialog-ikon" class="dialog-ikon" aria-hidden="true"></div>
+      <h3 id="dialog-judul"></h3>
+      <p id="dialog-pesan"></p>
+      <div class="dialog-aksi">
+        <button value="batal" id="dialog-batal" class="tombol" autofocus>Batal</button>
+        <button value="ya" id="dialog-ya" class="tombol utama">Ya</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="soal.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
